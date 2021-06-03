@@ -31,6 +31,14 @@
               <input formControlName="PASSWORD" type="password" id="inputPassword" class="form-control" placeholder="*******" required>
             </div>
 
+            <div class="form-label-group">
+              <label for="inputPassword">Tipo de usuario</label>
+              <select formControlName="TYPEUSERID" class="form-control">
+                <option [value]="1">Moderador</option>
+                <option [value]="2" selected>Estudiante</option>
+              </select>
+            </div>
+
             <div class="form-label-group mt-3">
               <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="!registerForm.valid" type="submit">Registrarme</button>
             </div>

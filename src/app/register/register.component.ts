@@ -19,7 +19,6 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private snotifyService: SnotifyService
   ) {
-    console.log(this.authService.currentUserValue);
 
     if (this.authService.currentUserValue) {
       this.router.navigate(['/home'])
@@ -28,7 +27,8 @@ export class RegisterComponent implements OnInit {
       FIRSTNAME : ['', [Validators.required, Validators.maxLength(50)]],
       LASTNAME : ['', [Validators.required, Validators.maxLength(50)]],
       EMAIL : ['', [Validators.required, Validators.maxLength(60), Validators.email]],
-      PASSWORD : ['', [Validators.required, Validators.minLength(6)]]
+      PASSWORD : ['', [Validators.required, Validators.minLength(6)]],
+      TYPEUSERID : ['', [Validators.required]]
     })
    }
 
