@@ -1,0 +1,91 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+  <a class="navbar-brand" href="#">KuepaEduTech</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="col-10 text-right" id="navbarsExampleDefault">
+      <button (click)="closeSession()" class="btn btn-dark my-2 my-sm-0" type="submit">Cerrar sesión</button>
+  </div>
+</nav>
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron mt-3">
+    <div class="container mt-5">
+      <h1 class="display-3">Bienvenido, {{ currentUser.firstName +' '+ currentUser.lastName }}!</h1>
+      <p>Clase actual - <b> Matemática avanzada</b></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-8 text-center">
+        <h2>Clase Online</h2>
+        <!-- <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p> -->
+        <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/UOSVz7IVoXc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="col-md-4">
+        <h2>Chat</h2>
+        <!-- <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p> -->
+        <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+
+        <div class="ibox-content">
+
+          <div class="row">
+
+              <div class="col-md-12 chatScroll">
+                  <div class="chat-discussion">
+
+                    <div class="chat-message left messageBox mb-2" *ngFor="let item of Messages" [ngClass]="item.user_id!=currentUser.id ? 'text-left' : 'text-right'">
+                      <div class="message">
+                        <p class="StudentColor">
+                          <small> <b>{{ item.user_id!=currentUser.id ? item.user : 'Yo' }}</b> <b class="text-danger">{{ item.typeUserId==1 ? ' - Moderador': '' }}</b> </small>
+                        </p>
+                        <span class="message-content">
+                          {{ item.message }}
+                        </span>
+                        <p class="">
+                          <small>
+                          <span class="message-date"> {{ item.createdAt }} </span></small>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class="row mt-2">
+              <div class="col-lg-8">
+                  <div class="chat-message-form">
+                      <div class="form-group">
+                          <textarea class="form-control message-input" name="message" [(ngModel)]="userChat.message" placeholder="Escribe un mensaje.."></textarea>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4">
+                  <div class="chat-message-form">
+                      <div class="form-group">
+                        <button class="btn btn-success" (click)="sendMessage()" [disabled]="userChat.message===''">Enviar</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+      </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+ <!-- /container -->
+
+</main>
+
+<footer class="container">
+  <p>&copy; Company 2021</p>
+</footer>

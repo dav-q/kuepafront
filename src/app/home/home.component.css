@@ -1,0 +1,15 @@
+.chatScroll{
+  max-height: 500px;
+  overflow: auto;
+}
+.messageBox{
+  background: #e9ecef;
+  border-radius: 5px;
+  padding: 5px;
+}
+.bg-primary{
+  background: #f16624!important;
+}
+.StudentColor{
+  color: blue;
+}

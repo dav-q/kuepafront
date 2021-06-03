@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+
+          <div class="text-center col-12 mb-3">
+            <img src="https://kuepa.com/COV2/assets/img/logo.png" alt="">
+          </div>
+
+          <h5 class="card-title text-center">Iniciar sesión</h5>
+          <!-- <form class="form-signin"> -->
+          <form [formGroup]="loginForm" (ngSubmit)="loginSubmit(loginForm.value)" class="form-signin" autocomplete="off" novalidate="">
+
+            <div class="form-label-group">
+              <label for="inputEmail">Correo</label>
+              <input formControlName="EMAIL" type="email" id="inputEmail" class="form-control" placeholder="pepito@pepito.com" required autofocus>
+            </div>
+
+            <div class="form-label-group">
+              <label for="inputPassword">Contraseña</label>
+              <input formControlName="PASSWORD" type="password" id="inputPassword" class="form-control" placeholder="*******" required>
+            </div>
+
+            <div class="form-label-group mt-3">
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="!loginForm.valid" type="submit">Iniciar sesión</button>
+            </div>
+
+            <p class="text-right mt-2">
+              <a [routerLink]="['/register']" routerLinkActive="router-link-active" >No estoy registado aún</a>
+            </p>
+            <hr class="my-4">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
