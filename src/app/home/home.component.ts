@@ -2,7 +2,7 @@ import { ChatServiceService } from './../_services/chat-service.service';
 import { SnotifyService } from 'ng-snotify';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from './../_services/authentication.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
 
   currentUser : any
+  @ViewChild('scrollDiv') private myScrollContainer: ElementRef;
 
   userChat={
     user:'',
@@ -58,13 +59,14 @@ export class HomeComponent implements OnInit {
     this.userChat.createdAt=new Date()
     this.chatService.sendMessage(this.userChat).subscribe((res)=>{
       this.chatService.emit(this.eventName,this.userChat)
+      this.scrollToElement(null)
       this.userChat.message=""
     })
   }
 
   getMessages(){
     this.chatService.getMessages({}).subscribe((res:any)=>{
-      console.log(res.messages);
+      // console.log(res.messages);
       var all_mss=[]
       for (let index = 0; index < res.messages.length; index++) {
         const element = res.messages[index];
@@ -77,51 +79,17 @@ export class HomeComponent implements OnInit {
         }
         all_mss.push(userChat)
       }
-
       this.Messages=all_mss
+      this.scrollToElement(null)
     })
   }
 
-
-  public DateFullSpanish = (date: string, hour = false) => {
-
-    var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-    var current_date = new Date(date);
-    let date_return = current_date.getUTCDate() + " de " + months[current_date.getUTCMonth()] + " del " + current_date.getUTCFullYear()
-
-    if (hour) {
-        var options = {
-            // timeZone: '',
-            hour12: true
-        };
-        var hours = current_date.toLocaleString('en-ES', options);
-
-        date_return += " " + hours
-    }
-
-    return date_return;
-}
-
-
-public DateShortSpanish = (date: string, hour = false) => {
-
-    var months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-    var current_date = new Date(date);
-
-    let date_return = months[current_date.getUTCMonth()] + " " + current_date.getUTCDate() + " de " + current_date.getUTCFullYear()
-
-    if (hour) {
-        var options = {
-            // timeZone: '',
-            hour12: true
-        };
-        var hours = current_date.toLocaleString('en-ES', options);
-        console.log(hours);
-
-        date_return += " " + hours
-    }
-
-    return date_return;
-}
+  scrollToElement(el): void {
+    this.myScrollContainer.nativeElement.scroll({
+      top: this.myScrollContainer.nativeElement.scrollHeight,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
 
 }

@@ -24,20 +24,24 @@
     <div class="row">
       <div class="col-md-8 text-center">
         <h2>Clase Online</h2>
-        <!-- <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p> -->
-        <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+
         <iframe width="560" height="315" src="https://www.youtube.com/embed/UOSVz7IVoXc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
       <div class="col-md-4">
-        <h2>Chat</h2>
-        <!-- <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p> -->
-        <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+        <h2>Chat
+            <button class="btn btn-primary" (click)="scrollToElement(null)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+              </svg>
+            </button>
+        </h2>
+
 
         <div class="ibox-content">
 
           <div class="row">
 
-              <div class="col-md-12 chatScroll">
+              <div class="col-md-12 chatScroll" #scrollDiv>
                   <div class="chat-discussion">
 
                     <div class="chat-message left messageBox mb-2" *ngFor="let item of Messages" [ngClass]="item.user_id!=currentUser.id ? 'text-left' : 'text-right'">
@@ -50,7 +54,7 @@
                         </span>
                         <p class="">
                           <small>
-                          <span class="message-date"> {{ item.createdAt }} </span></small>
+                          <span class="message-date"> {{ item.createdAt|changeDate:true }} </span></small>
                         </p>
                       </div>
                     </div>
@@ -67,10 +71,12 @@
                       </div>
                   </div>
               </div>
-              <div class="col-lg-4">
+              <div class="row col-lg-4">
                   <div class="chat-message-form">
                       <div class="form-group">
-                        <button class="btn btn-success" (click)="sendMessage()" [disabled]="userChat.message===''">Enviar</button>
+                        <div class="col-lg-2">
+                          <button class="btn btn-success" (click)="sendMessage()" [disabled]="userChat.message===''">Enviar</button>
+                        </div>
                       </div>
                   </div>
               </div>
